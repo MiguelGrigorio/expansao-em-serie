@@ -1,20 +1,125 @@
-from sympy import *
+from sympy import Symbol, diff, exp, pretty_print, factorial
+from math import pi
+
 
 x = Symbol('x')
-N = [5, 10, 30]
+n = Symbol('n')
+hx = x * exp(-2*x)
+x0 = 0
 
-dominio1 = [0, 0.3141592653589793, 0.6283185307179586, 0.9424777960769379, 1.2566370614359172, 1.5707963267948966, 1.8849555921538759, 2.199114857512855, 2.5132741228718345, 2.827433388230814, 3.141592653589793, 3.4557519189487724, 3.7699111843077517, 4.084070449666731, 4.39822971502571, 4.71238898038469, 5.026548245743669, 5.340707511102648, 5.654866776461628, 5.969026041820607]
 
 
+dominio1 = []
+dominio2 = []
+d1 = 0
+d2 = 0
 
-for i in N:
-    print(f'\nn = {i}')
-    somatorio = 0
-    for n in range(i):
-        #                           sin(x)                                        cos(x)
-        func_seq = [((-1)**n)*(x**(2*n+1))/(factorial(2*n+1)), ((-1)**n)*(x**(2*n))/(factorial(2*n))]
+for p in range(20):
+    dominio1.append(d1)
+    dominio2.append(d2)
+    d1 += 2*pi/20
+    d2 += 4/20
+    d2 = round(d2, 2)
+
+dominios = [dominio1, dominio1, dominio2]
+with open('data.dat', 'w') as data:
+    
+    
+#     # func_seq = [
+#     #     , 
+#     #     , 
+#     #     
+#     #     ]
         
-        for func in func_seq:
-            somatorio += func
-        for X in dominio1:
-            print(f'{X} : {somatorio.subs(x, X)}')
+
+
+#     seq = 0
+#     for n in range(5):
+#         seq += ((-1)**n) * (x**((2 * n) + 1)) / (factorial((2 * n) + 1))
+#     for X in dominios[0]:
+#         data.write(f'{X}\t{seq.subs(x, X)}\n')
+
+#     data.write('\n')
+
+#     seq = 0
+#     for n in range(10):
+#         seq += ((-1)**n) * (x**((2 * n) + 1)) / (factorial((2 * n) + 1))
+#     for X in dominios[0]:
+#         data.write(f'{X}\t{seq.subs(x, X)}\n')
+
+#     data.write('\n')
+
+#     seq = 0
+#     for n in range(30):
+#         seq += ((-1)**n) * (x**((2 * n) + 1)) / (factorial((2 * n) + 1))
+#     for X in dominios[0]:
+#         data.write(f'{X}\t{seq.subs(x, X)}\n')
+
+#     data.write('\n\n')
+
+#     seq = 0
+#     for n in range(5):
+#         seq += ((-1)**n) * (x**(2*n)) / (factorial(2*n))
+#     for X in dominios[1]:
+#         data.write(f'{X}\t{seq.subs(x, X)}\n')
+
+#     data.write('\n')
+
+#     seq = 0
+#     for n in range(10):
+#         seq += ((-1)**n) * (x**(2*n)) / (factorial(2*n))
+#     for X in dominios[1]:
+#         data.write(f'{X}\t{seq.subs(x, X)}\n')
+
+#     data.write('\n')
+
+#     seq = 0
+#     for n in range(30):
+#         seq += ((-1)**n) * (x**(2*n)) / (factorial(2*n))
+#     for X in dominios[1]:
+#         data.write(f'{X}\t{seq.subs(x, X)}\n')
+
+#     data.write('\n\n')
+
+#     seq = 0
+#     for n in range(5):
+#         seq += ((diff(hx, x, n).subs(x, x0) * (x - x0)**n) / factorial(n))
+#     for X in dominios[2]:
+#         data.write(f'{X}\t{seq.subs(x, X)}\n')
+
+#     data.write('\n')
+
+#     seq = 0
+#     for n in range(10):
+#         seq +=((diff(hx, x, n).subs(x, x0) * (x - x0)**n) / factorial(n))
+#     for X in dominios[2]:
+#         data.write(f'{X}\t{seq.subs(x, X)}\n')
+
+#     data.write('\n')
+
+#     seq = 0
+#     for n in range(30):
+#         seq += ((diff(hx, x, n).subs(x, x0) * (x - x0)**n) / factorial(n))
+#     for X in dominios[2]:
+#         data.write(f'{X}\t{seq.subs(x, X)}\n')
+
+#     data.write('\n\n')
+    N = [5, 10, 30]
+    n = 1
+
+    for f in range(3):
+        for s in N:
+            seq = 0
+            for n in range(s+1):
+                func_seq = [
+                    ((-1)**n) * (x**((2 * n) + 1)) / (factorial((2 * n) + 1)),
+                    ((-1)**n) * (x**(2*n)) / (factorial(2*n)),
+                    ((diff(hx, x, n).subs(x, x0) * (x - x0)**n) / factorial(n))
+                ]
+                func = func_seq[f]
+
+                seq += func
+            
+            for X in dominios[f]:
+                data.write(f'{X}\t{seq.subs(x, X)}\n')
+            data.write('\n\n')
