@@ -23,16 +23,6 @@ for p in range(20):
 
 dominios = [dominio1, dominio1, dominio2]
 with open('data.dat', 'w') as data:
-    
-    
-#     # func_seq = [
-#     #     , 
-#     #     , 
-#     #     
-#     #     ]
-        
-
-
 #     seq = 0
 #     for n in range(5):
 #         seq += ((-1)**n) * (x**((2 * n) + 1)) / (factorial((2 * n) + 1))
@@ -105,8 +95,8 @@ with open('data.dat', 'w') as data:
 
 #     data.write('\n\n')
     N = [5, 10, 30]
-    n = 1
-
+  
+    todes = []
     for f in range(3):
         for s in N:
             seq = 0
@@ -119,7 +109,11 @@ with open('data.dat', 'w') as data:
                 func = func_seq[f]
 
                 seq += func
+              
             
             for X in dominios[f]:
-                data.write(f'{X}\t{seq.subs(x, X)}\n')
+                arrayX = X
+                arrayY = seq.subs(x, X)
+                todes.append([arrayX, arrayY])
+                data.write(str(arrayX) + '\t' + str(arrayY) + '\n')
             data.write('\n\n')
