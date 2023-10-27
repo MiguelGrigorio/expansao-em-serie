@@ -1,45 +1,24 @@
-from sympy import Symbol, diff, exp, pretty_print, factorial
-from math import pi
+from calculos import pontos
+import matplotlib.pyplot as plt
+import numpy as np
+import math
 
-x = Symbol('x')
-n = Symbol('n')
-hx = x * exp(-2*x)
-x0 = 0
+print("1 - sen(x)")
+print("2 - cosx)")
+print("3 - x*e^(-2x)")
+eq = int(input("# Digite a equação desejada: "))
 
-dominio1 = []
-dominio2 = []
-d1 = 0
-d2 = 0
+P = pontos(eq, False)
+Px = P["Px"]
+Py = P["Py"]
+Py_5 = Py["5"]
+Py_10 = Py["10"]
+Py_30 = Py["30"]
+orgN = [None, "sen(x)", "cos(x)", "x * e^-2x"]
+org = [None, np.sin(Px), np.cos(Px), np.multiply(Px, np.float_power(math.e, (np.multiply(-2, Px))))]
 
-for p in range(20):
-    dominio1.append(d1)
-    dominio2.append(d2)
-    d1 += 2*pi/20
-    d2 += 4/20
-    d2 = round(d2, 2)
-
-dominios = [dominio1, dominio1, dominio2]
-
-with open('data.dat', 'w') as data:
-    N = [5, 10, 30]
-  
-    todes = []
-    for f in range(3):
-        for s in N:
-            seq = 0
-            for n in range(s+1):
-                func_seq = [
-                    ((-1)**n) * (x**((2 * n) + 1)) / (factorial((2 * n) + 1)),
-                    ((-1)**n) * (x**(2*n)) / (factorial(2*n)),
-                    ((diff(hx, x, n).subs(x, x0) * (x - x0)**n) / factorial(n))
-                ]
-                func = func_seq[f]
-
-                seq += func
-               
-            for X in dominios[f]:
-                arrayX = X
-                arrayY = seq.subs(x, X)
-                todes.append([arrayX, arrayY])
-                data.write(str(arrayX) + '\t' + str(arrayY) + '\n')
-            data.write('\n\n')
+plt.plot(Px, Py_5, label = "n = 5", linestyle = " ", marker = 'v') 
+plt.plot(Px, Py_10, label = "n = 10", linestyle = " ", marker = '^') 
+plt.plot(Px, Py_30, label = "n = 30", linestyle = " ", marker = '<') 
+plt.plot(Px, org[eq], label = "sen(x)", linestyle=" ", marker = '>')
+plt.show()
