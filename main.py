@@ -19,6 +19,7 @@ for p in range(20):
     d2 = round(d2, 2)
 
 dominios = [dominio1, dominio1, dominio2]
+
 with open('data.dat', 'w') as data:
     N = [5, 10, 30]
   
