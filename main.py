@@ -5,7 +5,7 @@ import math
 
 print("1 - sen(x)")
 print("2 - cosx)")
-print("3 - x*e^(-2x)")
+print("3 - x*e^-2x")
 eq = int(input("# Digite a equação desejada: "))
 
 P = pontos(eq, False)
@@ -20,5 +20,6 @@ org = [None, np.sin(Px), np.cos(Px), np.multiply(Px, np.float_power(math.e, (np.
 plt.plot(Px, Py_5, label = "n = 5", linestyle = " ", marker = 'v') 
 plt.plot(Px, Py_10, label = "n = 10", linestyle = " ", marker = '^') 
 plt.plot(Px, Py_30, label = "n = 30", linestyle = " ", marker = '<') 
-plt.plot(Px, org[eq], label = "sen(x)", linestyle=" ", marker = '>')
+plt.plot(Px, org[eq], label = orgN[eq], linestyle=" ", marker = '>')
+plt.legend()
 plt.show()
