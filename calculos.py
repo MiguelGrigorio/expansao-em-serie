@@ -1,4 +1,4 @@
-from sympy import factorial, diff, exp, Symbol
+from sympy import factorial, diff, exp, Symbol, Pow
 from math import pi
 
 N = [5, 10, 30]
@@ -16,8 +16,10 @@ def dominio(equacao: int):
 
   if equacao < 3:
     return gerar_pontos(2 * float(pi) / 20)
-  else:
+  elif equacao == 3:
     return gerar_pontos(4 / 20)
+  else:
+    return gerar_pontos(1 / 20)
 
 
 def somatorio(equacao: int, N: int, dominio: list):
@@ -32,13 +34,26 @@ def somatorio(equacao: int, N: int, dominio: list):
           eq += ((-1)**n) * x**(2 * n) / factorial(2 * n)
         case 3:
           y = Symbol('y')
-          eq += (diff(y * exp(-2 * y), y, n).subs(y, 0) * (y)**n) / factorial(n)
+          eq += (diff(y * exp(-2 * y), y, n).subs(y, 0) * y**n) / factorial(n)
           eq = eq.subs(y, x)
           pass
+        case 4:
+          u = Symbol('u')
+          eq += (diff((1 + u)**(-2), u, n).subs(u, 0)* u**n) / factorial(n)
+          eq = eq.subs(u, x)
+        case 5:
+          u = Symbol('u')
+          eq += (diff((1 - u)**(-2), u, n).subs(u, 0)* u**n) / factorial(n)
+          eq = eq.subs(u, x)
+        case 6:
+          u = Symbol('u')
+          eq += (diff((1 + u)**(-2), u, n).subs(u, 0)* u**n) / factorial(n) - (diff((1 - u)**(-2), u, n).subs(u, 0)* u**n) / factorial(n)
+          eq = eq.subs(u, x)
         case _:
           raise Exception("Equação Inválida")
     value.append(eq)
   return value
+
 
 def pontos(equacao: int, data: bool):
 
@@ -50,6 +65,7 @@ def pontos(equacao: int, data: bool):
       "30": [],
     }
   }
+
   dom = dominio(equacao)
   dicio["Px"] = dom
   for vezes in N:
