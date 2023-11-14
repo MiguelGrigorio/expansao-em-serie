@@ -1,4 +1,4 @@
-from sympy import factorial, diff, exp, Symbol, Pow
+from sympy import factorial, diff, exp, Symbol
 from math import pi
 
 N = [5, 10, 30]
@@ -7,7 +7,7 @@ N = [5, 10, 30]
 def dominio(equacao: int):
 
   def gerar_pontos(incremento: float):
-    v = 0
+    v = 0.000000001
     arr = []
     for _ in range(20):
       arr.append(v)
@@ -20,7 +20,6 @@ def dominio(equacao: int):
     return gerar_pontos(4 / 20)
   else:
     return gerar_pontos(1 / 20)
-
 
 def somatorio(equacao: int, N: int, dominio: list):
   value = []
@@ -39,16 +38,27 @@ def somatorio(equacao: int, N: int, dominio: list):
           pass
         case 4:
           u = Symbol('u')
-          eq += (diff((1 + u)**(-2), u, n).subs(u, 0)* u**n) / factorial(n)
+          f = u ** (n + 1)
+          eq += (diff(f, u) * (-1) ** n)
           eq = eq.subs(u, x)
         case 5:
           u = Symbol('u')
-          eq += (diff((1 - u)**(-2), u, n).subs(u, 0)* u**n) / factorial(n)
+          g = u ** (n + 1)
+          eq += diff(g, u)
           eq = eq.subs(u, x)
         case 6:
           u = Symbol('u')
-          eq += (diff((1 + u)**(-2), u, n).subs(u, 0)* u**n) / factorial(n) - (diff((1 - u)**(-2), u, n).subs(u, 0)* u**n) / factorial(n)
+          f = u ** (n + 1)
+          g = f
+          eq += (diff(f, u) * (-1) ** n) - diff(g, u)
           eq = eq.subs(u, x)
+        case 7:
+          u = Symbol('u')
+          f = u ** (n + 1)
+          g = f
+          eq += (diff(f, u) * ((-1) ** n) + diff(g, u)) - (2 * (u ** 2))
+          eq = eq.subs(u, x)
+
         case _:
           raise Exception("Equação Inválida")
     value.append(eq)
