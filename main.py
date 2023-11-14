@@ -11,7 +11,7 @@ orgN =  [
             "(1 + u)^-2",
             "(1 - u)^-2",
             "(1 + u)^-2 - (1 - u)^-2",
-            "(1 - u)^-2 + (1 + u)^-2 - 2(y^-2)"
+            "(1 - u)^-2 + (1 + u)^-2 - 2(1^-2)"
         ]
 
 for i in range(1, len(orgN)):
@@ -44,7 +44,7 @@ org =   [
             np.subtract(np.add(np.power(np.add(1, Px), -2),
                                np.power(np.subtract(1, Px), -2)
                               ),
-                        np.multiply(2, np.power(np.power(Px, -1), -2))
+                        np.multiply(2, np.power(1, -2))
                        )
         ]
 
