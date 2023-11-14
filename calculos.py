@@ -56,7 +56,9 @@ def somatorio(equacao: int, N: int, dominio: list):
           u = Symbol('u')
           f = u ** (n + 1)
           g = f
-          eq += (diff(f, u) * ((-1) ** n) + diff(g, u)) - (2 * (u ** 2))
+          eq += (diff(f, u) * ((-1) ** n) + diff(g, u))
+          if n == 0:
+            eq += - (2 * diff(1 ** -2, u, n).subs(u, 0)
           eq = eq.subs(u, x)
 
         case _:
