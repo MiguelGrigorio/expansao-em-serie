@@ -7,7 +7,7 @@ N = [5, 10, 30]
 def dominio(equacao: int):
 
   def gerar_pontos(incremento: float):
-    v = 0.000000001
+    v = 0
     arr = []
     for _ in range(20):
       arr.append(v)
@@ -58,7 +58,7 @@ def somatorio(equacao: int, N: int, dominio: list):
           g = f
           eq += (diff(f, u) * ((-1) ** n) + diff(g, u))
           if n == 0:
-            eq += - (2 * diff(1 ** -2, u, n).subs(u, 0)
+            eq += - (2 * diff(1 ** -2, u, n).subs(u, 0))
           eq = eq.subs(u, x)
 
         case _:
