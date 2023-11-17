@@ -2,7 +2,7 @@ from sympy import factorial, diff, exp, Symbol
 from math import pi
 
 N = [5, 10, 30]
-
+d = 0
 
 def dominio(equacao: int):
 
@@ -19,7 +19,12 @@ def dominio(equacao: int):
   elif equacao == 3:
     return gerar_pontos(4 / 20)
   else:
-    return gerar_pontos(1 / 20)
+    v = d
+    arr = []
+    for _ in range(20):
+      arr.append(v)
+      v += 1/20
+    return arr
 
 def somatorio(equacao: int, N: int, dominio: list):
   value = []
@@ -47,27 +52,34 @@ def somatorio(equacao: int, N: int, dominio: list):
           eq += diff(g, u)
           eq = eq.subs(u, x)
         case 6:
+          y = Symbol('y')
           u = Symbol('u')
+          
+          #f = 1/(2*y) ** (n + 1)
           f = u ** (n + 1)
           g = f
-          eq += (diff(f, u) * (-1) ** n) - diff(g, u)
-          eq = eq.subs(u, x)
+          eq += (diff(f, u) * (-1)**n) - diff(g, u)
+          eq = eq.subs(u, d/(2*y))
+          eq = eq.subs(y, x)
         case 7:
+          y = Symbol('y')
           u = Symbol('u')
           f = u ** (n + 1)
           g = f
           eq += (diff(f, u) * ((-1) ** n) + diff(g, u))
           if n == 0:
             eq += - (2 * diff(1 ** -2, u, n).subs(u, 0))
-          eq = eq.subs(u, x)
-
+          eq = eq.subs(u, d/y)
+          eq = eq.subs(y, x)
         case _:
           raise Exception("Equação Inválida")
     value.append(eq)
   return value
 
 
-def pontos(equacao: int, data: bool):
+def pontos(equacao: int, data: bool, distance: float):
+  global d
+  d = distance
 
   dicio = {
     "Px": [],
