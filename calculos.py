@@ -73,6 +73,7 @@ def somatorio(equacao: int, N: int, dominio: list):
           eq = eq.subs(u, x)
         case _:
           raise Exception("Equação Inválida")
+    value = value[::-1]
     value.append(eq)
   return value
 
