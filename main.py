@@ -59,6 +59,8 @@ org =   [
                                2
                        )
         ]
+org[-1] = org[-1][::-1]
+org[-2] = org[-2][::-1]
 
 plt.plot(Px, Py_5, label = "n = 5", linestyle = " ", marker = 'v') 
 plt.plot(Px, Py_10, label = "n = 10", linestyle = " ", marker = '^') 
