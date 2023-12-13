@@ -28,6 +28,7 @@ else:
 
 P = pontos(eq, False, d)
 Px = P["Px"]
+PPx = []
 if eq > 3 and eq < 7:
     PPx = np.divide(d, np.multiply(2, Px))
 elif eq == 7:
