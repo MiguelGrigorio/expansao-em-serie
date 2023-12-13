@@ -21,29 +21,26 @@ for i in range(1, len(orgN)):
 
 eq = int(input("# Digite a equação desejada: "))
 
-if eq > 3:
-    d = float(input("# Digite o tamanho de d: "))
-else:
-    d = 0
+d = 1
 
 P = pontos(eq, False, d)
 Px = P["Px"]
-PPx = []
-if eq > 3 and eq < 7:
-    PPx = np.divide(d, np.multiply(2, Px))
-elif eq == 7:
-    PPx = np.divide(d, Px)
 Py = P["Py"]
 Py_5 = Py["5"]
 Py_10 = Py["10"]
 Py_30 = Py["30"]
-
 # Diminuir quantidade de pontos
 for _ in range(0):
     del Px[0]
     del Py_5[0]
     del Py_10[0]
     del Py_30[0]
+
+PPx = []
+if eq > 3 and eq < 7:
+    PPx = np.divide(d, np.multiply(2, Px))
+elif eq == 7:
+    PPx = np.divide(d, Px)
 org =   [
             None,
             np.sin(Px),
