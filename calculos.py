@@ -23,11 +23,11 @@ def dominio(equacao: int):
     arr = []
     for _ in range(20):
       if equacao == 6:
-        v = d/(2*v)
+        x = d/(2*v)
       else:
-        v = d/v
-      arr.append(v)
-      v += 1/20
+        x = d/v
+      arr.append(x)
+      v += d/20
     return arr
 
 def somatorio(equacao: int, N: int, dominio: list):
@@ -73,8 +73,8 @@ def somatorio(equacao: int, N: int, dominio: list):
           eq = eq.subs(u, x)
         case _:
           raise Exception("Equação Inválida")
-    value = value[::-1]
     value.append(eq)
+  value = value[::-1]
   return value
 
 
